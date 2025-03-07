@@ -15,7 +15,7 @@ type Conf1gDto struct {
 	databaseURL  string
 	databaseName string
 	users        string // Added the users field
-	debug string
+	debug        string
 }
 
 func init() {

@@ -19,7 +19,7 @@ func (ac *AuthController) Login(ctx *gin.Context) {
 
 	var loginDto dto.LoginDto
 	if err := ctx.ShouldBindJSON(&loginDto); err != nil {
-		ctx.Error(fmt.Errorf("400::%s::%s::%v", "no user found", "authController.login", err))
+		ctx.Error(fmt.Errorf("401 :: %s :: %s :: %v", "no user found", "userService.Login", err))
 		if err != nil {
 			log.Fatalf("Error binding login dto: %v", err)
 		}
@@ -27,7 +27,7 @@ func (ac *AuthController) Login(ctx *gin.Context) {
 	}
 	data, err := ac.authService.Login(loginDto, nil)
 	if err != nil {
-		ctx.Error(fmt.Errorf("400::%s::%s::%v", "no user found", "authController.login", err))
+		ctx.Error(fmt.Errorf("401 :: %s :: %s :: %v", "no user found", "userService.Login", err))
 		return
 	}
 

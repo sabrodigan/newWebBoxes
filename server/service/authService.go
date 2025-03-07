@@ -31,7 +31,7 @@ func (as *AuthService) Login(loginDto dto.LoginDto, sessionContext mongo.Session
 			"token": "",
 		}, nil
 	}
-	return nil, fmt.Errorf("402::%s::%s::%v", "invalid credentials", "userService.Login", err)
+	return nil, fmt.Errorf("402 :: %s :: %s :: %v", "invalid credentials", "userService.Login", err)
 }
 
 func GetAuthService(repository repo.Repository, userService IUserService) IAuthService {

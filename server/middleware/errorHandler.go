@@ -20,7 +20,8 @@ func ErrorHandling() gin.HandlerFunc {
 			if err != nil {
 				splitErr := strings.Split(err.Error(), "::")
 				isDebugEnabled, _ := config.GetEnvProperty("debug")
-				if isDebugEnabled != "" && len(splitErr) > 0 {
+				isDebugEnabled = strings.TrimSpace(strings.ToLower(isDebugEnabled))
+				if isDebugEnabled == "yes" && len(splitErr) > 0 {
 					fmt.Printf("Method name: %s, Status Code:%s, Client Message:%s, Error:%v\n", splitErr[1], splitErr[0], splitErr[2], splitErr[3])
 				}
 				statusCode, err := strconv.Atoi(splitErr[0])
@@ -35,5 +36,4 @@ func ErrorHandling() gin.HandlerFunc {
 			}
 		}
 	}
-
 }

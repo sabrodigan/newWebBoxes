@@ -19,12 +19,12 @@ func (uc *UserController) CreateUser(ctx *gin.Context) {
 
 	var dto model.UserCreateDto
 	if err := ctx.ShouldBindJSON(&dto); err != nil {
-		ctx.Error(fmt.Errorf("400::%s::%s::%v", "Invalid request", "userController.CreateUser", err))
+		ctx.Error(fmt.Errorf("400 :: %s :: %s :: %v", "invalid request", "userController.CreateUser", err))
 		return
 	}
 	data, err := uc.userService.CreateUser(dto, nil)
 	if err != nil {
-		ctx.Error(fmt.Errorf("400::%s::%s::%v", "Invalid request", "userController.CreateUser", err))
+		ctx.Error(fmt.Errorf("400 :: %s :: %s :: %v", "invalid request", "userController.CreateUser", err))
 		return
 	}
 
