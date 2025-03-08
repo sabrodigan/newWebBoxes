@@ -1,11 +1,13 @@
 <template>
   <ion-button :id="id" :class="style" @click="OnButtonClick" :disabled="isDisabled">
+    {{ title }}
+    <ion-spinner :name="spinnerName" v-if="isDisabled"></ion-spinner>
   </ion-button>
 </template>
 
-import { IonButton, IonSpinner } from '@ionic/vue';
-
 <script>
+  import { IonButton, IonSpinner } from '@ionic/vue';
+
   export default {
     name: 'AppButton',
     components: {
@@ -36,17 +38,24 @@ import { IonButton, IonSpinner } from '@ionic/vue';
       dependentIdsToBeBlocked: {
         type: Array,
         default: () => []
-      },
+      }
+    },
+    data() {
+      return {
+        isButtonDisabled: false,
+      }
+    },
     computed: {
-        isDisabled() {
-          return true
+      isDisabled() {
+        return this.isButtonDisabled
       }
     },
     methods: {
       async onButtonClick() {
+        this.isButtonDisabled = true;
         await this.action(this.dependentIdsToBeBlocked);
+        this.isButtonDisabled = false;
       }
-    },
     }
   }
 </script>
