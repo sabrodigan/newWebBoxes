@@ -17,6 +17,7 @@
         <strong>Ready to create an app?</strong>
         <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
         <p>This is the basis of the App WebBoxes!</p>
+        <app-button id="button" title="Click Me!" action="() => console.log('Button clicked!')"></app-button>
 
       </div>
     </ion-content>
@@ -25,6 +26,13 @@
 
 <script>
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import AppButton from "@/components/AppButton.vue";
+
+export default {
+  name: 'HomePage',
+  components: { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, AppButton }
+};
+
 </script>
 
 <style scoped>
