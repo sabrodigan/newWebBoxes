@@ -5,52 +5,62 @@
   </ion-button>
 </template>
 
-<script setup>
-import { ref, computed } from 'vue';
-import { IonButton, IonSpinner } from '@ionic/vue';
+<script lang="js">
+  import { IonButton, IonSpinner } from '@ionic/vue';
 
-defineProps({
-  id: {
-    type: String,
-    default: ''
-  },
-  title: {
-    type: String,
-    default: ''
-  },
-  styleClass: {
-    type: String,
-    default: ''
-  },
-  spinnerName: {
-    type: String,
-    default: 'bubbles'
-  },
-  action: {
-    type: Function,
-    default: () => {}
-  },
-  dependentIdsToBeBlocked: {
-    type: Array,
-    default: () => []
-  }
-});
+  export default {
+    name: 'AppButton',
+    components: {
+      IonButton,
+      IonSpinner
+    },
+    props: {
+      id: {
+        type: String,
+        default: ''
+      },
+      title: {
+        type: String,
+        default: ''
+      },
+      styleClass: {
+        type: String,
+        default: ''
+      },
+      spinnerName: {
+        type: String,
+        default: 'bubbles'
+      },
+      action: {
+        type: Function,
+        Required: true
+      },
+      dependentIdsToBeDisabled: {
+        type: Array,
+        default: []
+      }
+    },
+    data() {
+      return {
+        isButtonDisabled: false,
+      };
+    },
+    methods: {
+      async onButtonClick() {
+        this.isButtonDisabled = true;
+        setTimeout(async () => {
+          await this.action(this.dependentIdsToBeDisabled)
+          this.isButtonDisabled = false;
+        }, 6000);
+      }
+    },
+    computed: {
+      isDisabled() {
+        return this.isButtonDisabled
+        }
 
-const isButtonDisabled = ref(false);
-const isDisabled = computed(() => isButtonDisabled.value);
-
-const onButtonClick = async () => {
-  this.isButtonDisabled.value = true;
-  try {
-    await Promise.resolve(action(dependentIdsToBeBlocked));
-  } catch (err) {
-    console.error('Error running action:', err);
-  } finally {
-    isButtonDisabled.value = false;
-  }
-};
-
-
+    }}
 </script>
+
 
 <style scoped></style>

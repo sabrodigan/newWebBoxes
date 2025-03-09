@@ -17,7 +17,7 @@
         <strong>Ready to create an app?</strong>
         <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
         <p>This is the basis of the App WebBoxes!</p>
-        <app-button id="button" title="Click Me!" action="() => console.log('Button clicked!')"></app-button>
+        <app-button id="button" title="Submit" :action="() => console.log('Button clicked!')"></app-button>
 
       </div>
     </ion-content>
