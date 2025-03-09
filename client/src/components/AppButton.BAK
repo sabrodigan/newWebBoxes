@@ -1,0 +1,63 @@
+<template>
+  <ion-button :id="id" :class="styleClass" @click="onButtonClick" :disabled="isDisabled">
+    {{ title }}
+    <ion-spinner :name="spinnerName" v-if="isDisabled"></ion-spinner>
+  </ion-button>
+</template>
+
+<script setup>
+import { ref, computed } from 'vue';
+import { IonButton, IonSpinner } from '@ionic/vue';
+
+export default {
+  name: 'AppButton',
+  components: {
+    IonButton,
+  },
+  props: {
+    id: {
+      type: String,
+      default: ''
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    styleClass: {
+      type: String,
+      default: ''
+    },
+    spinnerName: {
+      type: String,
+      default: 'bubbles'
+    },
+    action: {
+      type: Function,
+      default: () => {}
+    },
+    dependentIdsToBeBlocked: {
+      type: Array,
+      default: () => []
+    },
+    onButtonClick: {
+      type: Function,
+      default: () => {}
+    },
+    methods:
+      async () => {
+        this.isButtonDisabled = true;
+        try {
+          await Promise.resolve(action(dependentIdsToBeBlocked));
+        } catch (err) {
+          console.error('Error running action:', err);
+        } finally {
+          this.isButtonDisabled = false;
+        }
+    }
+};
+
+
+
+</script>
+
+<style scoped></style>
